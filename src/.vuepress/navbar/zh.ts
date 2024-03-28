@@ -2,29 +2,21 @@ import { navbar } from "vuepress-theme-hope";
 
 export const zhNavbar = navbar([
   "/zh/",
-  "/zh/demo/",
+  "/zh/Java/",
   {
-    text: "指南",
+    text: "项目地址",
     icon: "lightbulb",
-    prefix: "/zh/guide/",
     children: [
       {
-        text: "Bar",
+        text: "XRPC",
         icon: "lightbulb",
-        prefix: "bar/",
-        children: ["baz", { text: "...", icon: "ellipsis", link: "" }],
+        link: "https://gitee.com/rentouzhunao/xlw-xrpc",
       },
       {
         text: "Foo",
         icon: "lightbulb",
-        prefix: "foo/",
-        children: ["ray", { text: "...", icon: "ellipsis", link: "" }],
+        link: "https://theme-hope.vuejs.press/zh/",
       },
     ],
-  },
-  {
-    text: "V2 文档",
-    icon: "book",
-    link: "https://theme-hope.vuejs.press/zh/",
   },
 ]);

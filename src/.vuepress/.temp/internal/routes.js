@@ -19,13 +19,15 @@ export const routes = Object.fromEntries([
   ["/zh/demo/layout.html", { loader: () => import(/* webpackChunkName: "layout.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/demo/layout.html.js"), meta: {"t":"布局","i":"object-group","O":2} }],
   ["/zh/demo/markdown.html", { loader: () => import(/* webpackChunkName: "markdown.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/demo/markdown.html.js"), meta: {"t":"Markdown 展示","i":"fab fa-markdown","O":2} }],
   ["/zh/demo/page.html", { loader: () => import(/* webpackChunkName: "page.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/demo/page.html.js"), meta: {"t":"页面配置","i":"file","O":3} }],
-  ["/zh/demo/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/demo/index.html.js"), meta: {"t":"主要功能与配置演示","i":"laptop-code"} }],
+  ["/zh/demo/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/demo/index.html.js"), meta: {"t":"Java","i":"laptop-code"} }],
   ["/zh/guide/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/guide/index.html.js"), meta: {"t":"指南","i":"lightbulb"} }],
+  ["/zh/Java/markdown.html", { loader: () => import(/* webpackChunkName: "markdown.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/Java/markdown.html.js"), meta: {"t":"Markdown 展示","i":"fab fa-markdown","O":2} }],
   ["/zh/guide/bar/baz.html", { loader: () => import(/* webpackChunkName: "baz.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/guide/bar/baz.html.js"), meta: {"t":"Baz","i":"circle-info"} }],
   ["/zh/guide/bar/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/guide/bar/index.html.js"), meta: {"t":"Bar 功能","i":"lightbulb"} }],
   ["/zh/guide/foo/ray.html", { loader: () => import(/* webpackChunkName: "ray.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/guide/foo/ray.html.js"), meta: {"t":"Ray","i":"circle-info"} }],
   ["/zh/guide/foo/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/guide/foo/index.html.js"), meta: {"t":"Foo 功能","i":"lightbulb"} }],
   ["/404.html", { loader: () => import(/* webpackChunkName: "404.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/404.html.js"), meta: {"t":""} }],
+  ["/zh/Java/", { loader: () => import(/* webpackChunkName: "index.html" */"E:/code/xlw-blogs/blogs_web/src/.vuepress/.temp/pages/zh/Java/index.html.js"), meta: {"t":"Java"} }],
 ]);
 
 if (import.meta.webpackHot) {
