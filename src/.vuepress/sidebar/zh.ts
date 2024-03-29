@@ -6,8 +6,7 @@ export const zhSidebar = sidebar({
     {
       text: "目录",
       icon: "laptop-code",
-      prefix: "Java/",
-      link: "Java/",
+      prefix: "guide/",
       children: "structure",
     },
   ],

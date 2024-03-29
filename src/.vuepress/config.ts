@@ -12,7 +12,7 @@ export default defineUserConfig({
     },
     "/zh/": {
       lang: "zh-CN",
-      title: "知识收集",
+      title: "学无止境",
       description: "记录学习历程",
     },
   },

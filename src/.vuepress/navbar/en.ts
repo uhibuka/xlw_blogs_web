@@ -2,11 +2,11 @@ import { navbar } from "vuepress-theme-hope";
 
 export const enNavbar = navbar([
   "/",
-  "/zh/Java/",
+  "/guide/",
   {
     text: "Project address",
     icon: "lightbulb",
-    prefix: "/guide/",
+    // prefix: "/guide/",
     children: [
       {
         text: "XRPC",

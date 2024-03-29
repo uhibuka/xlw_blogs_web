@@ -6,8 +6,7 @@ export const enSidebar = sidebar({
     {
       text: "catalogue",
       icon: "laptop-code",
-      prefix: "Java/",
-      link: "Java/",
+      prefix: "guide/",
       children: "structure",
     },
   ],

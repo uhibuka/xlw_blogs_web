@@ -2,7 +2,7 @@ import { navbar } from "vuepress-theme-hope";
 
 export const zhNavbar = navbar([
   "/zh/",
-  "/zh/Java/",
+  "/zh/guide/",
   {
     text: "项目地址",
     icon: "lightbulb",
