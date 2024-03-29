@@ -13,9 +13,9 @@ export const zhNavbar = navbar([
         link: "https://gitee.com/rentouzhunao/xlw-xrpc",
       },
       {
-        text: "Foo",
+        text: "XRPC",
         icon: "lightbulb",
-        link: "https://theme-hope.vuejs.press/zh/",
+        link: "https://gitee.com/rentouzhunao/xlw-xrpc",
       },
     ],
   },
