@@ -34,7 +34,6 @@ export default hopeTheme({
         editLink: "Edit this page on GitHub",
       },
     },
-
     /**
      * Chinese locale config
      */
@@ -79,14 +78,19 @@ export default hopeTheme({
 
     // All features are enabled for demo, only preserve features you need here
     mdEnhance: {
+       // 启用 figure
+       figure: true,
+       // 启用图片懒加载
+       imgLazyload: true,
+       // 启用图片标记
+       imgMark: true,
+       // 启用图片大小
+       imgSize: true,
       align: true,
       attrs: true,
       codetabs: true,
       component: true,
       demo: true,
-      figure: true,
-      imgLazyload: true,
-      imgSize: true,
       include: true,
       mark: true,
       stylize: [

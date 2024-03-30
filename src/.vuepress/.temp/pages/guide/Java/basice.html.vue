@@ -30,6 +30,416 @@
 <li><strong>生存时间</strong>：成员变量是对象地一部分，随着对象地创建而存在，而局部变量是随着方法地调用而自动生成，随着方法调用结束而消亡。</li>
 </ul>
 </details>
+<details class="hint-container details"><summary>4.静态变量有什么作用？</summary>
+<p><code v-pre>static</code>的主要作用是使成员变量或方法与类关联，而不是与类的实例关联</p>
+<ul>
+<li>这意味着他们可以在没有创建类实力的情况下被访问和调用。同时，静态成员变量也可以被所有该类的实例共享，可以用于存储类级别的信息，比如计数器，常量等。</li>
+<li>静态变量只会被分配一次内存，即使创建多个对象，他们都共享一份静态变量，这样可以节省内存。</li>
+<li>可以通过类名访问，可以搭配<code v-pre>final</code>关键字做常量。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>5.字符型常量和字符串常量的区别？</summary>
+<ul>
+<li>
+<p>形式：字符常量是单引号引起的一个字符，字符串常量是双引号引起的0个或若干个字符。</p>
+</li>
+<li>
+<p>含义：字符常量相当于一个整型值（ASCII 值），可以参加表达式运算；字符常量代表一个地址值（该字符串在内存中存放位置）。</p>
+</li>
+<li>
+<p>占内存大小：字符常量只占两个字节；字符串常量占若干个字节。</p>
+<p><strong>注意 <code v-pre>char</code>在Java中占两个字节</strong></p>
+</li>
+</ul>
+<details class="hint-container details"><summary>6.静态方法为什么不能调用非静态成员？</summary>
+<p>需结合JVM相关知识，主要原因如下：</p>
+<ol>
+<li>静态方法是属于类的，在类加载的时候就会分配内存，可以通过类名直接访问。而非静态成员属于实例对象，只有对象实例化之后才存在，需要通过类的实例对象去访问。</li>
+<li>在类的非静态成员不存在的时候静态方法就已经存在了，此时调用在内存中还不存在的非静态成员变量，属于非法操作。</li>
+</ol>
+</details>
+</details>
+<details class="hint-container details"><summary>7.静态方法和实例方法有何不同？</summary>
+<ol>
+<li>形式：静态方法-static修饰，是属于类的，每个类就一份，在类加载的时候会分配内存，可以通过类名直接访问，实例方法需要创建对应的实例对象才能调用，多个实例对象都有各自的实例方法。</li>
+<li>调用方式：静态方法-类名点进行调用，实例方法需要创建实例对象，然后实例对象点进行调用。</li>
+<li>访问限制的区别：静态只能调用静态，实例都可以调用。</li>
+<li>生命周期：静态方法的生命周期和类相关，而实例方法与对应实例相关。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>8.重载和重写的区别？</summary>
+<p>共同点：</p>
+<ol>
+<li>都涉及方法：可以在类中定义多个方法，他们的方法名相同但是参数列表不同。</li>
+<li>都是多态的体现：多态是指同一个方法名可以在同一个类的不同方法或者不同的类中以不同的方式实现。</li>
+</ol>
+<ul>
+<li>重载一个类可以有多个同名方法。</li>
+<li>重写就是子类对父类方法重新改造，外部样子不能改变，内部逻辑可以改变。</li>
+</ul>
+<p>不同点：</p>
+<ol>
+<li>适用范围不同：
+<ul>
+<li>重载（Overloading）指的是在同一个类中定义多个方法，他们的方法名相同，但是参数列表不同。</li>
+<li>重写（Overriding）指的是子类可以定义与父类中同名、同参数列表的方法，用于覆盖父类中的方法，重写只发生在子类覆盖父类的方法情况。</li>
+</ul>
+</li>
+<li>方法签名：
+<ul>
+<li>对于重载，方法名相同但是参数列表必须不同（参数类型，顺序，个数）</li>
+<li>对于重写，方法名、参数列表必须相同，返回类型可以是子类的类型或者其子类型。</li>
+</ul>
+</li>
+<li>返回类型
+<ul>
+<li>对于重载，返回类型可以相同也可以不同，但是方法的参数列表必须不同。</li>
+<li>对于重写，返回类型必须相同或是其子类</li>
+</ul>
+</li>
+<li>运行时行为
+<ul>
+<li>对于重载，方法调用的解析在编译时发生，根据传入的参数类型来决定调用哪个方法。</li>
+<li>对于重写，方法的调用在运行时通过动态分派发生，根据实际对象的类型来决定调用哪个方法。</li>
+</ul>
+</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>9.面向对象和面向过程的区别？</summary>
+<ul>
+<li>面向过程把解决问题的过程拆成一个个方法，通过一个个方法执行解决问题</li>
+<li>面向对象会先抽象出对象，然后用对象执行方法的方式解决问题</li>
+<li>面向对象由于封装、继承、多态三大特征的原因，更易维护、易复用。但是因其要实例化对象，对性能的开销比较大。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>10.面向对象三大特征</summary>
+<p><strong>封装、继承、多态</strong>：</p>
+<ul>
+<li>封装：把成员变量和具体的方法封装到一个具体的类中，以后的编码无需关系对象内部问题，只面对这个对象本身。</li>
+<li>继承：核心目的就是代码复用，通过继承，子类可以复用父类的方法，并可以通过super关键字直接调用，也能重写父类的方法，形成多态。可以通过组合的方式，降低耦合，实现更好的封装</li>
+<li>多态：表示一个对象具有多种状态。（有继承（接口、抽象类、类）、有重写、父类引用指向子类对象）。</li>
+</ul>
+<details class="hint-container details"><summary>11.接口和抽象类的区别？</summary>
+<p>共同点：</p>
+<ul>
+<li>接口和抽象类都不能被实例化。</li>
+<li>接口和抽象类都可以包含抽象方法，没有方法体的方法。</li>
+<li>接口和抽象类都可以由默认实现的方法</li>
+</ul>
+<p>不同点：</p>
+<ul>
+<li>抽象类是一个类使用 abstract class，并且抽象方法需要使用abstract修饰，而接口使用interface修饰，接口的抽象方法默认就是抽象，不需要添加abstract。</li>
+<li>抽象类可以继承一个类，也可以实现一个接口，但是只能继承一个，但是能够实现多个。而接口只能继承，但是可以继承多个。</li>
+<li>抽象类可以有构造器，而接口没有。</li>
+<li>接口主要是用以对类的行为进行约束，实现了某个接口，就具有了对应的行为。抽象类主要用于代码复用，强调的数所属关系。</li>
+</ul>
+</details>
+</details>
+<details class="hint-container details"><summary>12.深拷贝和浅拷贝的区别是什么？什么是引用拷贝？</summary>
+<ul>
+<li>深拷贝：深拷贝会完全复制整个对象，包括这个对象所包含的内部对象，得到的是一个全新的对象。</li>
+<li>浅拷贝：浅拷贝会在堆上创建一个新的对象，只拷贝当前对象，如果当前对象的内部是引用类型的话，浅拷贝会直接复制内部对象的引用地址，也即是说拷贝对象和原对象共用一个内部对象。</li>
+<li>引用拷贝：简单来说，引用拷贝就是两个不同的引用指向同一个对象</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>13.Object类的常见方法有哪些？</summary>
+<p>11个常用方法：</p>
+<div class="language-java line-numbers-mode" data-ext="java" data-title="java"><pre v-pre class="language-java"><code><span class="token doc-comment comment">/**
+ * native 方法，用于返回当前运行时对象的 Class 对象，使用了 final 关键字修饰，故不允许子类重写。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span> <span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * native 方法，用于返回对象的哈希码，主要使用在哈希表中，比如 JDK 中的HashMap。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">native</span> <span class="token keyword">int</span> <span class="token function">hashCode</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * 用于比较 2 个对象的内存地址是否相等，String 类对该方法进行了重写以用于比较字符串的值是否相等。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span><span class="token class-name">Object</span> obj<span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * native 方法，用于创建并返回当前对象的一份拷贝。
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">native</span> <span class="token class-name">Object</span> <span class="token function">clone</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">CloneNotSupportedException</span>
+<span class="token doc-comment comment">/**
+ * 返回类的名字实例的哈希码的 16 进制的字符串。建议 Object 所有的子类都重写这个方法。
+ */</span>
+<span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * native 方法，并且不能重写。唤醒一个在此对象监视器上等待的线程(监视器相当于就是锁的概念)。如果有多个线程在等待只会任意唤醒一个。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">notify</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * native 方法，并且不能重写。跟 notify 一样，唯一的区别就是会唤醒在此对象监视器上等待的所有线程，而不是一个线程。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">notifyAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token doc-comment comment">/**
+ * native方法，并且不能重写。暂停线程的执行。注意：sleep 方法没有释放锁，而 wait 方法释放了锁 ，timeout 是等待时间。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">native</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span>
+<span class="token doc-comment comment">/**
+ * 多了 nanos 参数，这个参数表示额外时间（以纳秒为单位，范围是 0-999999）。 所以超时的时间还需要加上 nanos 纳秒。。
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token keyword">long</span> timeout<span class="token punctuation">,</span> <span class="token keyword">int</span> nanos<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span>
+<span class="token doc-comment comment">/**
+ * 跟之前的2个wait方法一样，只不过该方法一直等待，没有超时时间这个概念
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">final</span> <span class="token keyword">void</span> <span class="token function">wait</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">InterruptedException</span>
+<span class="token doc-comment comment">/**
+ * 实例被垃圾回收器回收的时候触发的操作
+ */</span>
+<span class="token keyword">protected</span> <span class="token keyword">void</span> <span class="token function">finalize</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Throwable</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></details>
+<details class="hint-container details"><summary>14.==和equals()的区别？</summary>
+<ul>
+<li>==：==在比较基本数据类型时，比较的是值，比较引用数据类型时比较的时内存地址</li>
+<li>equals()：在本质上和==相同，但是equals()可以被重写，重写之后会通过其他内容进行比较。例如，String重写了equals()之后会通过字符值进行比较，另外重写equals之后必须重写hashcode()。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>15.什么是hashcode()？</summary>
+<ol>
+<li>
+<p><code v-pre>hashCode()</code> 是 Java 中 <code v-pre>Object</code> 类的一个方法，用于返回对象的哈希码值。哈希码是一个整数，它代表了对象在内存中的地址或者说是对象的标识符。每个对象都有一个唯一的哈希码，即使它们的内容相同，哈希码也会不同。</p>
+</li>
+<li>
+<p><code v-pre>hashCode()</code> 方法的存在是为了支持基于哈希表的数据结构，例如 <code v-pre>HashMap</code> 或 <code v-pre>HashSet</code>。这些数据结构在查找、插入等操作时依赖于哈希码来确定对象的存储位置，从而提高了操作的效率，而且先检验<code v-pre>hashCode</code>，这样我们就大大减少了 <code v-pre>equals</code> 的次数，相应就大大提高了执行速度。</p>
+</li>
+<li>
+<p>虽然 <code v-pre>hashCode()</code> 方法对于基于哈希表的数据结构非常重要，但它仅仅是一个计算哈希码的方法，不提供确切的对象比较。实际上，在哈希表中，可能会出现不同对象具有相同哈希码的情况，这称为哈希冲突。因此，还需要提供 <code v-pre>equals()</code> 方法来确切地比较两个对象是否相等。</p>
+</li>
+<li>
+<p>两个对象具有相同的 <code v-pre>hashCode</code> 值，这意味着它们在哈希表中可能会被放置到相同的位置。然而，哈希码只是一个指示，它并不一定能够唯一地标识一个对象。因此，即使两个对象的哈希码相同，它们的内容也可能是不同的，这种情况称为哈希码冲突。</p>
+<ul>
+<li>
+<p>因为<code v-pre>hashCode()</code>可以重写，假如我们有一个学生类，有两个属性id和name，我们重写<code v-pre>hashCode</code>，把id当<code v-pre>hashCode</code>，他们id全是1，但是姓名却不同，这样虽然<code v-pre>hashCode</code>相等，但是<code v-pre>equals</code>却不相等。</p>
+</li>
+<li>
+<p>总的来说，<code v-pre>hashCode()</code> 提供了一种快速确定对象存储位置的方法，但它并不能保证对象的唯一性。因此，仍然需要使用 <code v-pre>equals()</code> 方法来确切地比较两个对象是否相等。</p>
+</li>
+</ul>
+</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>16.为什么重写equals()时必须重写hashcode()方法？</summary>
+<ol>
+<li><code v-pre>equals()</code>和<code v-pre>hashcode()</code>分别用于不同的目的：
+<ul>
+<li><code v-pre>equals()</code>用于确切的比较两个对象的内容是否相等。</li>
+<li><code v-pre>hashCode()</code>用于在哈希表等数据结构中确定对象的存储位置，以提高从查找和插入的效率。</li>
+</ul>
+</li>
+<li>重写 <code v-pre>equals()</code> 方法时，必须同时重写 <code v-pre>hashCode()</code> 方法的原因是：
+<ul>
+<li>hashCode()和equals() 在哈希表等数据结构中配套使用的。在使用哈希表时，首先会根据对象的hashCode()值确定存储位置，然后再使用equals()方法来确切的比较对象是否相等。</li>
+<li>如果两个对象在equals() 方法中被认为相等，那么他们的hashCode()值也必须相等，以确保他们在哈希表中的存储位置一直，否则会导致对象在哈希表中无法被正确检索。</li>
+</ul>
+</li>
+</ol>
+<p>总的来说重写 <code v-pre>equals()</code> 方法时，也要重写 <code v-pre>hashCode()</code> 方法，以保证对象在哈希表等数据结构中的正确性和性能。</p>
+</details>
+<details class="hint-container details"><summary>17.重写`equals()`时没有重写`hashCode()`方法的话，使用`HashMap`可能会出现什么问题？</summary>
+<ol>
+<li><code v-pre>hashCode()</code>相等但是<code v-pre>eques()</code>不相等。
+<ul>
+<li>这会导致两个对象被放到相同的位置，但由于<code v-pre>equals()</code>返回<code v-pre>false</code>，它们被认为不相等。这会导致在查找时无法正确的找到相等的对象。</li>
+</ul>
+</li>
+<li><code v-pre>hashCode()</code>不相等但是<code v-pre>eques()</code>相等。
+<ul>
+<li>会导致两个对象在哈希表中被放到相同的位置，由于equals()返回<code v-pre>false</code>，它们被认为不相等，这会导致在查找时无法正确的找到相等的对象。</li>
+</ul>
+</li>
+</ol>
+<p>这两种情况都破坏了哈希表的正确性和性能。</p>
+<ol>
+<li>哈希冲突：由于没有重写<code v-pre>hashCode()</code>方法，对象的哈希码将由默认的Object类的实现决定，这可能导致相同内容的对象具有不同的哈希码，从而产生哈希冲突。这回影响到对象在哈希表中的存储位置。</li>
+<li>无法正确的检索对象</li>
+<li>无法正确的删除对象</li>
+<li>导致内存泄漏</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>18.String、StringBuffer、StringBuilder 的区别</summary>
+<ul>
+<li>String是不可变的，因为被final修饰了，不能被继承，同时String内部维护了一个private final修饰的char数组，但是没有提供修改这个字符串的方法，因此是线程安全的。对任何String的操作都会返回一个新的String对象。</li>
+<li>StringBuffer、StringBuilder 都是继承自<code v-pre>AbstractStringBuilder</code>，内部维护的是char数组，是可变的，但是<code v-pre>StringBuffer</code>的所有方法都是synchronized修饰的同步方法，每次只能一个线程访问，是线程安全的，但是<code v-pre>StringBuilder</code> 不是线程安全的，不适合在多线程环境使用。</li>
+</ul>
+<p>Java9把String的底层实现由char[]改成了byte[],支持两个编码方案：Latin-1 和 UTF-16（Java8之前只支持UTF-6）。如果字符串的汉字没有超过Latin-1 的范围就会使用Latin-1 。Latin-1 编码下byte只占一个字节，相较于char节省了空间。</p>
+</details>
+<details class="hint-container details"><summary>19.字符串拼接用”+“还是StringBuilder？</summary>
+<p>本质都是StringBuilder的append()方法拼接，但是用&quot;+&quot;的话编译器不会创建单个StringBuilder复用，会导致创建过多的StringBuilder对象。</p>
+</details>
+<details class="hint-container details"><summary>20.String s1 = new String("abc");这句话创建了几个字符串对象？String.intern() 方法有什么作用?</summary>
+<p>会创建1或2个</p>
+<ol>
+<li>如果字符串常量池中不存在字符串对象”abc“的引用，那么他将首先在字符串常量池中创建，然后在堆空间中创建，因此将创建总共2个字符串对象。</li>
+<li><code v-pre>String.intern()</code>是一个native（本地）方法，其作用是将指定的字符串对象引用保存在字符串常量池中，可以分为两种情况：
+<ul>
+<li>如果字符串常量池中保存了对应的字符串对象的引用，就直接返回该引用。</li>
+<li>如果字符串常量池没有保存对应的字符串对象的引用，那就在常量池中创建一个指向该字符串对象的引用并返回。</li>
+</ul>
+</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>21.String类型的变量和常量做+运算时发生了什么</summary>
+<ul>
+<li>常量和常量：<strong>对于编译期可以确定值的字符串，也就是常量字符串，jvm会将其存入字符串常量池。并且，字符串常量拼接得到的字符串常量在编译阶段就已经被存放到字符串常量池，这得益于编译器的优化-常量折叠</strong></li>
+<li>常量和变量，变量和变量：<strong>引用的值在编译期是无法确定的，编译器无法对其进行优化</strong>
+<ul>
+<li>对象引用和”+“的字符串拼接方式，实际上是通过 <code v-pre>StringBuilder</code> 调用 <code v-pre>append()</code> 方法实现的，拼接完成之后调用 <code v-pre>toString()</code> 得到一个 <code v-pre>String</code> 对象 。</li>
+</ul>
+</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>22.Java的异常体系介绍一下</summary>
+<p>在 Java 中，所有的异常都有一个共同的祖先 <code v-pre>java.lang</code> 包中的 <code v-pre>Throwable</code> 类。<code v-pre>Throwable</code> 类有两个重要的子类:</p>
+<ul>
+<li>
+<p><strong><code v-pre>Exception</code></strong> :程序本身可以处理的异常，可以通过 <code v-pre>catch</code> 来进行捕获。<code v-pre>Exception</code> 又可以分为：</p>
+<ul>
+<li>
+<p>Checked Exception (受检查异常，必须处理) - 编译时异常</p>
+<ul>
+<li><strong>IOException</strong> 及其子类：
+<ul>
+<li><code v-pre>FileNotFoundException</code></li>
+<li><code v-pre>IOException</code></li>
+<li><code v-pre>EOFException</code> 等</li>
+</ul>
+</li>
+<li><strong>SQLException</strong>：与数据库操作相关的异常。</li>
+<li><strong>ClassNotFoundException</strong>：当试图加载类但找不到对应的类文件时抛出。</li>
+<li><strong>InterruptedException</strong>：当一个线程处于阻塞、等待或睡眠状态，但被另一个线程中断时抛出。</li>
+<li><strong>CloneNotSupportedException</strong>：当试图克隆一个不支持克隆的对象时抛出。</li>
+<li><strong>NoSuchMethodException</strong>：当试图调用一个不存在的方法时抛出。</li>
+<li><strong>NoSuchFieldException</strong>：当试图访问一个不存在的字段时抛出。</li>
+<li><strong>InstantiationException</strong> 和 <strong>IllegalAccessException</strong>：通常与反射相关，当试图实例化一个抽象类、接口或私有构造函数时抛出。</li>
+<li><strong>ParseException</strong>：通常与日期解析相关，当无法解析字符串为指定格式的日期时抛出。</li>
+<li><strong>MalformedURLException</strong>：当试图创建一个URL实例，但提供的URL格式不正确时抛出。</li>
+</ul>
+</li>
+<li>
+<p>Unchecked Exception (不受检查异常，可以不处理) - 运行时异常</p>
+<ul>
+<li>
+<p><code v-pre>RuntimeException</code> 及其子类都统称为非受检查异常</p>
+</li>
+<li>
+<p><code v-pre>ArithmeticException</code>（算术错误）</p>
+</li>
+<li>
+<p><code v-pre>NullPointerException</code>(空指针错误)</p>
+</li>
+<li>
+<p><code v-pre>ClassCastException</code>（类型转换错误）</p>
+</li>
+<li>
+<p><code v-pre>ArrayIndexOutOfBoundsException</code>（数组越界错误）</p>
+</li>
+<li>
+<p><code v-pre>IllegalArgumentException</code>(参数错误比如方法入参类型错误)</p>
+</li>
+<li>
+<p><code v-pre>NumberFormatException</code>（字符串转换为数字格式错误，<code v-pre>IllegalArgumentException</code>的子类）</p>
+</li>
+<li>
+<p><code v-pre>SecurityException</code> （安全错误比如权限不够）</p>
+<p><code v-pre>UnsupportedOperationException</code>(不支持的操作错误比如重复创建同一用户)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code v-pre>Error</code></strong>：<code v-pre>Error</code> 属于程序无法处理的错误 ，我们没办法通过 <code v-pre>catch</code> 来进行捕获不建议通过<code v-pre>catch</code>捕获 。例如 Java 虚拟机运行错误（<code v-pre>Virtual MachineError</code>）、虚拟机内存不够错误(<code v-pre>OutOfMemoryError</code>)、类定义错误（<code v-pre>NoClassDefFoundError</code>）等 。这些异常发生时，Java 虚拟机（JVM）一般会选择线程终止。</p>
+<ul>
+<li><strong>OutOfMemoryError</strong>：当JVM耗尽了可用的内存资源时抛出，导致无法继续执行程序。</li>
+<li><strong>StackOverflowError</strong>：当一个线程递归调用的深度超过了JVM所能处理的范围时抛出，通常是因为调用栈溢出。</li>
+<li><strong>NoClassDefFoundError</strong>：当试图加载类，但在运行时找不到类的定义时抛出。</li>
+<li><strong>ExceptionInInitializerError</strong>：当一个类的静态初始化器（静态代码块）抛出异常时抛出，导致类无法被正确初始化。</li>
+<li><strong>LinkageError</strong>：代表在链接阶段出现问题，通常是由于类版本不匹配、缺少依赖项等情况。</li>
+<li><strong>VirtualMachineError</strong>：是所有错误的父类，用于表示与虚拟机操作有关的错误情况。</li>
+<li><strong>AssertionError</strong>：通常由 <code v-pre>assert</code> 语句失败抛出，用于在测试代码中检查条件是否为真。</li>
+<li><strong>InternalError</strong>：表示Java虚拟机发现了内部错误或不一致性。</li>
+</ul>
+<p>请注意，与编译时异常和运行时异常不同，<code v-pre>Error</code> 不是必须被捕获或抛出的，因为它们通常表示程序无法恢复的严重问题。通常情况下，最好的做法是让程序终止并记录错误信息以便调查。</p>
+</li>
+</ul>
+<ol>
+<li>不要把异常定义为静态变量，因为这样会导致异常栈信息错乱。每次手动抛出异常，我们都需要手动 new 一个异常对象抛出。</li>
+<li>建议抛出更加具体的异常比如字符串转换为数字格式错误的时候应该抛出<code v-pre>NumberFormatException</code>而不是其父类<code v-pre>IllegalArgumentException</code>。</li>
+<li>抛出 / 打印的异常信息一定要有意义。</li>
+<li>使用日志打印异常之后就不要再抛出异常了（两者不要同时存在一段代码逻辑中）。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>23.Throwable有哪些常用方法？</summary>
+<p><code v-pre>void printStackTrace()</code>: 在控制台上打印 <code v-pre>Throwable</code> 对象封装的异常信息</p>
+<p><code v-pre>String getMessage()</code>: 返回异常发生时的简要描述</p>
+<p><code v-pre>String toString()</code>: 返回异常发生时的详细信息</p>
+<p><code v-pre>String getLocalizedMessage()</code>: 返回异常对象的本地化信息。使用 <code v-pre>Throwable</code> 的子类覆盖这个方法，可以生成本地化信息。如果子类没有覆盖该方法，则该方法返回的信息与 <code v-pre>getMessage()</code>返回的结果相同</p>
+</details>
+<details class="hint-container details"><summary>24.try-catch-finally使用介绍一下</summary>
+<ul>
+<li>try块用于捕获异常，其后面可以接0个或多个catch块，如果没有catch块必须有finally块。</li>
+<li>catch块用于处理try'捕获到的异常</li>
+<li>finally块：无论是否捕获到异常，finally块里的代码都会被执行。当在try块或catch块中遇到return语句时，finally语句块将在方法返回之前被执行。</li>
+</ul>
+<p><strong>注意：不要在finally块中使用return！</strong></p>
+<ul>
+<li>当 try 语句和 finally 语句中都有 return 语句时，try 语句块中的 return 语句会被忽略，但是会执行 try 语句的return代码</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>25.finally中的代码一定会执行吗？</summary>
+<ol>
+<li>finally之前程序所在的线程死亡</li>
+<li>finally之前虚拟机被终止运行的话不会。——System.exit(1);</li>
+<li>finally之前关闭CPU。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>26.什么是泛型</summary>
+<p>泛型就是一种能够让程序处理各种不同类型的数据的方法。</p>
+<ul>
+<li>他就像一个容器，可以装不同类型的东西，但是在使用的时候，你可以告诉它具体装的是什么类型的东西，这样程序能够更加灵活和安全的处理数据。</li>
+</ul>
+<p>泛型（Generics）是一种在编程中提供强大类型安全性的特性。它允许你在代码中定义类、接口、方法等时使用一个或多个类型参数，从而实现对类型的参数化。这样可以在编译时期提供更强的类型检查，并减少了在运行时出现类型错误的可能性。</p>
+<p>泛型的作用：</p>
+<ol>
+<li>类型安全性：泛型可以在编译时期检查代码，防止类型不匹配的错误。这使得代码更加健壮和可靠。</li>
+<li>代码复用：泛型代码可以适用于多种数据类型，减少了重复编写相似代码的工作量。</li>
+<li>抽象数据类型：泛型可以用于定义通用的数据结构和算法，如列表、栈、队列等。</li>
+<li>库的通用性：泛型使得库能够提供通用的数据结构和算法，可以被不同的数据类型使用。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>27.什么是反射？</summary>
+<p>反射（Reflection）是一种在运行时动态获取类信息、调用对象方法、访问对象属性的能力。</p>
+<ul>
+<li>反射允许程序在运行时获取类的信息，比如类名、方法名、属性等，并且可以在运行时调用这些方法，访问这些属性。这样可以是程序在运行时动态的进行操作，而不需要在编译时就确定号所有的类和方法。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>28.反射的原理是什么？</summary>
+<p>反射的原理是依赖于底层虚拟机的机制和在运行时通过反射API（java.lang.reflect包）来操作程序的元信息（如类、方法、属性）</p>
+<ul>
+<li>在Java中，虚拟机会在加载类的时候生成相应的<code v-pre>Class</code>对象，这个对象包含了类的所有信息。反射API就是在这个基础上提供了一系列的方法来访问和操作这些信息。</li>
+<li>在运行时可以通过反射机制-反射API来获取和操作</li>
+</ul>
+<p>在底层，实现反射通常涉及以下几个步骤：</p>
+<ol>
+<li><strong>获取类信息</strong>: 首先，程序通过类加载器加载一个类，并在内存中创建一个表示该类的<code v-pre>Class</code>对象。这个<code v-pre>Class</code>对象包含了该类的所有信息，如方法、属性等。</li>
+<li><strong>获取成员信息</strong>: 通过<code v-pre>Class</code>对象可以获取到类的所有成员（字段和方法），包括公共的、私有的等。</li>
+<li><strong>访问成员</strong>: 反射API提供了方法来访问类的成员，比如获取和设置属性的值，调用方法等。这可以绕过编译时的访问权限检查。</li>
+<li><strong>创建对象实例</strong>: 反射可以通过<code v-pre>Class</code>对象来创建类的实例。</li>
+<li><strong>调用方法</strong>: 反射可以动态地调用类的方法，包括公共的、私有的等。</li>
+</ol>
+<p>需要注意的是，由于<strong>反射的操作是在运行时进行的，相比直接调用代码，反射会带来一定的性能损耗</strong>。因此，在性能要求高的场景下，应该避免过度使用反射。</p>
+</details>
+<details class="hint-container details"><summary>29.反射的应用场景有哪些？</summary>
+<ol>
+<li>动态代理：反射可以用于创建动态代理，显示在运行时动态生成代理类，对原有类进行增强。如动态代理设计模式。</li>
+<li>动态加载类：可以在程序运行时动态加载一些类。例如插件系统，或者根据配置文件动态加载不同的实现。</li>
+<li>框架和库开发：很多框架和库使用反射来实现各种功能。（例如Spring中的依赖注入，AOP等）。</li>
+<li>配置文件处理：可以通过反射来读取配置文件中的类名、方法名等信息，从而动态的创建对象或调用方法。</li>
+</ol>
+<p>总的来说，反射是一种非常强大的机制，可以让程序在运行时获取并操作类的信息，从而实现许多灵活和高级的功能。然而，由于反射的运行时性能开销相对较高，因此在使用时需要慎重考虑性能方面的影响。</p>
+</details>
 </div></template>
 
 

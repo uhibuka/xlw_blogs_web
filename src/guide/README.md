@@ -5,9 +5,15 @@ icon: lightbulb
 
 ## Java Interview Questions
 
-- [Java set](Java/set.md)
+- [Java Set](Java/set.md)
 
-- [Java basice](Java/basice.md)
+- [Java Basice](Java/basice.md)
+
+- [Java Thread](Java/thread.md) 
+
+- [Java JVM](Java/jvm.md) 
+
+- [Java IO](Java/io.md) 
 
 - [Network](network/network.md)
 
@@ -16,3 +22,5 @@ icon: lightbulb
 - [Redis](redis/redis.md)
   
 - [Spring](spring/spring.md)
+
+ 

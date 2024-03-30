@@ -1,5 +1,6 @@
 import { defineUserConfig } from "vuepress";
 import theme from "./theme.js";
+import { hopeTheme } from "vuepress-theme-hope";
 
 export default defineUserConfig({
   base: "/",
@@ -7,7 +8,7 @@ export default defineUserConfig({
   locales: {
     "/": {
       lang: "en-US",
-      title: "Knowledge collection",
+      title: "Knowledge is infinite.",
       description: "Record learning process",
     },
     "/zh/": {
@@ -18,6 +19,7 @@ export default defineUserConfig({
   },
 
   theme,
+  
 
   // Enable it with pwa
   // shouldPrefetch: false,
