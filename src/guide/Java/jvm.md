@@ -3,7 +3,7 @@ title: Java JVM
 icon: fab fa-markdown
 order: 2
 category:
-  - 使用指南
+  - Java JVM
 tag:
   - Markdown
 ---

@@ -1,3 +1,278 @@
-<template><div></div></template>
+<template><div><details class="hint-container details"><summary>1.网络分层结构</summary>
+<p>计算机网络体系大概分为三种，OSI七层模型、TCP/IP四层模型和五层模型。</p>
+<figure><img src="https://xlw-blogs.oss-cn-beijing.aliyuncs.com/src/imageTCPIP.png" alt="TCP/IP 七层模型" tabindex="0" loading="lazy"><figcaption>TCP/IP 七层模型</figcaption></figure>
+</details>
+<details class="hint-container details"><summary>2.三次握手</summary>
+<figure><img src="https://xlw-blogs.oss-cn-beijing.aliyuncs.com/src/imagethree hand shaking.png" alt="三次握手" tabindex="0" loading="lazy"><figcaption>三次握手</figcaption></figure>
+</details>
+<details class="hint-container details"><summary>3.四次挥手</summary>
+<figure><img src="https://xlw-blogs.oss-cn-beijing.aliyuncs.com/src/imagefour-way handshake.png" alt="四次挥手" tabindex="0" loading="lazy"><figcaption>四次挥手</figcaption></figure>
+<p><strong>第四次挥手为什么要等待2MSL</strong>：保证A发送的最后一个ACK报文段能够到达B。防止已失效的连接请求报文段出现在本连接中。</p>
+<p><strong>为什么需要四次挥手</strong>：因为server段收到client端发送的SYN请求报文之后，可以直接发送SYN+ACK报文。但是在关闭连接时，当server端收到client端发送的连续释放报文时很可能并不会立刻关闭socket，所以server端先回复一个ACK报文，告诉Client端我收到你的连接释放报文了，只有等server端所有的报文都发送完毕，才能发送连接释放报文，之后连接才会真正断开。</p>
+</details>
+<details class="hint-container details"><summary>4.TCP报文手部有哪些字段，及其作用。</summary>
+<ul>
+<li><strong>16位端口号</strong>：源端口号，该报文的来源。目标端口号，开报文的目的地。</li>
+<li><strong>32位序号</strong>：一次TCP通信过程中某一个传输方向上的字节流的每个字节的编号。</li>
+<li><strong>32位确认号</strong>：用作对另一方发送的tcp报文段的响应。其值是收到tcp报文段的序号值加1.</li>
+<li><strong>4位头部长度</strong>：表示tcp头部长度，最长60字节。</li>
+<li><strong>6位标志位</strong>：URG(紧急指针是否有效)，ACK（表示确认号是否有效），PSH（缓冲区尚未填满），RST（表示要求对方重新建立连接），SYN（建立连接消息标志接），FIN（表示告知对方本端要关闭连接了）。</li>
+<li><strong>16位窗口大小</strong>：是TCP控制流量的一个手段。</li>
+<li><strong>16位校验和</strong>:由发送端填充，接收端对TCP报文执行CRC算法以检验TCP报文端在传输过程中是否损坏。</li>
+<li><strong>16位紧急指针</strong>：发送紧急数据的方法。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>5.TCP有哪些特点</summary>
+<ul>
+<li>TCP是面向连接的运输层协议</li>
+<li>点对点，每一条TCP连接只能有两个端点。</li>
+<li>TCP提供可靠交付的服务。</li>
+<li>TCP提供全双工通信</li>
+<li>面向字节流</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>6.TCP和UDP的区别？</summary>
+<ol>
+<li>TCP面向连接，UDP是无连接的，发送数据之前不需要建立连接。</li>
+<li>TCP提供可靠的服务。UDP不保证可靠交付。</li>
+<li>TCP面向字节流，把数据看成是一串无结构的字节流；UDP是面向报文的。</li>
+<li>TCP有拥塞控制；UDP没有，因此网络阻塞也不会影响数据发送效率，适合用于传输实时视频。</li>
+<li>TCP是点到点；UPD支持一对一，一对多，多对一，多对多的通信方式。</li>
+<li>TCP首部开销20字节；UDP首部开销小，只有8个字节。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>7.TPC和UDP分别对应的常见应用层协议有哪些？</summary>
+<p><strong>基于TCP的应用层协议有：HTTP、FTP、SMTP、TELNET、SSH</strong></p>
+<ul>
+<li><strong>HTTP</strong>：HyperText Transfer Protocol（超文本传输协议），默认端口80</li>
+<li><strong>FTP</strong>：File Transfer Protocol (文件传输协议), 默认端口(20用于传输数据，21用于传输控制信息)</li>
+<li><strong>SMTP</strong>：Simple Mail Transfer Protocol (简单邮件传输协议) ,默认端口25</li>
+<li><strong>TELNET</strong>：Teletype over the Network (网络电传), 默认端口23</li>
+<li><strong>SHH</strong>：Secure Shell（安全外壳协议），默认端口 22</li>
+</ul>
+<p><strong>基于UDP的应用层协议：DNS、TFTP、SNMP</strong></p>
+<ul>
+<li><strong>DNS</strong> ：Domain Name Service (域名服务),默认端口 53</li>
+<li><strong>TFTP：</strong> Trivial File Transfer Protocol (简单文件传输协议)，默认端口69</li>
+<li><strong>SNMP</strong>：Simple Network Management Protocol（简单网络管理协议），通过UDP端口161接收，只有Trap信息采用UDP端口162。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>8.TCP的粘包和拆包</summary>
+<p>TCP是面向流的，没有界限的一串数据。TCP底层并不了解上层业务数据的具体含义，因此会根据TCP缓冲区域的大小进行包的划分，因此一个完整的包可能会被拆分成几个发送出去，导致拆包。也可能把多个小的数据包封装成一个大的数据包发送。</p>
+<ul>
+<li>要发送的数据小于缓冲区的大小，TCP将多次写入缓冲区的数据一次发送出去，导致粘包。</li>
+<li>接收数据段的应用从没有即使读取接收缓冲区的数据，将会发生粘包。</li>
+<li>要发送的数据大于缓冲区的大小，将会发生拆包。</li>
+<li>待发送的数据大于MMS（最大报文长度），TCP再传输过程前将进行拆包。</li>
+</ul>
+<p><strong>解决方案</strong>：</p>
+<ul>
+<li>发送端将每个数据封装为固定长度</li>
+<li>在数据尾部增加特殊字符进行分割</li>
+<li>将数据分为两部分，一部分石头布，一部分是内容体，其中头部结构大小固定，且有一个字段声明内容体的大小。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>9.TCP是如何保障可靠性的</summary>
+<ul>
+<li>TCP连接是基于三次握手，断开是基于四次挥手。确保连接和断开的可靠性。</li>
+<li>其次，TCP是由状态的；TCP会记录哪些数据发送了，哪些数据被接收了，那些数据没有被接收，并且保证数据包按序到达，保证数据传输不出差错。</li>
+<li>TCP的可靠性还体现在可控制。他有数据包校验、ACK应答、超时重传（发送方）失序数据重传（接收方）、丢弃重复数据、流量控制（滑动窗口）和拥塞控制等机制。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>10.TCP的滑动窗口机制</summary>
+<p>TCP利用滑动窗口来实现流量控制，控制发送方发送速率，保证接收方来的及接收数据。TCP会话的双方都各自维护一个发送窗口和一个接收窗口。接收窗口的大小取决于应用、系统、硬件的限制。发送窗口取决于对端通告的接收窗口，接收窗口中的window字段可以影响发送窗口的数据发送效率。当window字段设置为0时，则发送方不能发送数据。</p>
+</details>
+<details class="hint-container details"><summary>11.拥塞控制</summary>
+<p>防止过多的数据注入到网络中。 几种拥塞控制方法：慢开始( slow-start )、拥塞避免( congestion avoidance )、快重传( fast retransmit )和快恢复( fast recovery )。</p>
+<p><strong>慢开始</strong></p>
+<p>把拥塞窗口 cwnd 设置为一个最大报文段MSS的数值。而在每收到一个对新的报文段的确认后，把拥塞窗口增加至多一个MSS的数值。每经过一个传输轮次，拥塞窗口 cwnd 就加倍。 为了防止拥塞窗口cwnd增长过大引起网络拥塞，还需要设置一个慢开始门限ssthresh状态变量。</p>
+<p>当 cwnd &lt; ssthresh 时，使用慢开始算法。</p>
+<p>当 cwnd &gt; ssthresh 时，停止使用慢开始算法而改用拥塞避免算法。</p>
+<p>当 cwnd = ssthresh 时，既可使用慢开始算法，也可使用拥塞控制避免算法。</p>
+<p><strong>拥塞避免</strong></p>
+<p>让拥塞窗口cwnd缓慢地增大，每经过一个往返时间RTT就把发送方的拥塞窗口cwnd加1，而不是加倍。这样拥塞窗口cwnd按线性规律缓慢增长。</p>
+<p>无论在慢开始阶段还是在拥塞避免阶段，只要发送方判断网络出现拥塞（其根据就是没有收到确认），就要把慢开始门限ssthresh设置为出现拥塞时的发送 方窗口值的一半（但不能小于2）。然后把拥塞窗口cwnd重新设置为1，执行慢开始算法。这样做的目的就是要迅速减少主机发送到网络中的分组数，使得发生 拥塞的路由器有足够时间把队列中积压的分组处理完毕。</p>
+<p><strong>快重传</strong></p>
+<p>有时个别报文段会在网络中丢失，但实际上网络并未发生拥塞。如果发送方迟迟收不到确认，就会产生超时，就会误认为网络发生了拥塞。这就导致发送方错误地启动慢开始，把拥塞窗口cwnd又设置为1，因而降低了传输效率。</p>
+<p>快重传算法可以避免这个问题。快重传算法首先要求接收方每收到一个失序的报文段后就立即发出重复确认，使发送方及早知道有报文段没有到达对方。</p>
+<p>发送方只要一连收到三个重复确认就应当立即重传对方尚未收到的报文段，而不必继续等待重传计时器到期。由于发送方尽早重传未被确认的报文段，因此采用快重传后可以使整个网络吞吐量提高约20%。</p>
+<p><strong>快恢复</strong></p>
+<p>当发送方连续收到三个重复确认，就会把慢开始门限ssthresh减半，接着把cwnd值设置为慢开始门限ssthresh减半后的数值，然后开始执行拥塞避免算法，使拥塞窗口缓慢地线性增大。</p>
+<p>在采用快恢复算法时，慢开始算法只是在TCP连接建立时和网络出现超时时才使用。 采用这样的拥塞控制方法使得TCP的性能有明显的改进。</p>
+</details>
+<details class="hint-container details"><summary>12.HTTP协议的特点</summary>
+<ol>
+<li>HTTP允许传输任意类型的数据，传输类型由Content-Type加以标记。</li>
+<li>无状态，对于客户端每次发送的请求服务器都认为是一个新的请求，上一次会话和下一次会话之间没有联系。</li>
+<li>支持客户端/服务器模式</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>13.HTTP报文格式</summary>
+<p>HTTP请求由请求行，请求头，空行和请求体四个部分组成。</p>
+<ul>
+<li><strong>请求行</strong>：包括请求方法，资源URL，使用的HTTP版本。<code v-pre>GET</code>和<code v-pre>POST</code>是最常见的HTTP方法，除此以外还包括<code v-pre>DELETE、HEAD、OPTIONS、PUT、TRACE</code>。</li>
+<li><strong>请求头</strong>：格式类似为json的kv格式。服务端短通过请求头获取客户端信息，主要有<code v-pre>cookie、host、connection、accept-language、accept-encoding、user-agent</code>。</li>
+<li><strong>请求体</strong>：用户请求数据，如用户名，密码等。</li>
+</ul>
+<p>HTT响应也有四个部分组成，分别是：响应行，响应头，空行和响应体。</p>
+<ul>
+<li>响应行：协议版本，状态码及状态描述</li>
+<li>响应头：响应头字段主要有<code v-pre>connection、content-type、content-encoding、content-length、set-cookie、Last-Modified，、Cache-Control、Expires</code>。</li>
+<li>响应体：服务端返回给客户端的内容。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>14.HTTP状态码</summary>
+<figure><img src="https://xlw-blogs.oss-cn-beijing.aliyuncs.com/src/imageResponse code.png" alt="HTTP状态码" tabindex="0" loading="lazy"><figcaption>HTTP状态码</figcaption></figure>
+</details>
+<details class="hint-container details"><summary>15.HTTP协议包括哪些请求</summary>
+<p>HTTP协议中共定义了八种方法来表示对Request-URI指定的资源的不同操作方式，具体如下：</p>
+<ul>
+<li>
+<p>GET：向特定的资源发出请求。</p>
+</li>
+<li>
+<p>POST：向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST请求可能会导致新的资源的创建和/或已有资源的修改。</p>
+</li>
+<li>
+<p>OPTIONS：返回服务器针对特定资源所支持的HTTP请求方法。也可以利用向Web服务器发送’*'的请求来测试服务器的功能性。</p>
+</li>
+<li>
+<p>HEAD：向服务器索要与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以在不必传输整个响应内容的情况下，就可以获取包含在响应消息头中的元信息。</p>
+</li>
+<li>
+<p>PUT：向指定资源位置上传其最新内容。</p>
+</li>
+<li>
+<p>DELETE：请求服务器删除Request-URI所标识的资源。</p>
+</li>
+<li>
+<p>TRACE：回显服务器收到的请求，主要用于测试或诊断。</p>
+</li>
+<li>
+<p>CONNECT：HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。</p>
+</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>16.HTTP状态码301和302的区别</summary>
+<ul>
+<li>301：是永久性转移，请求的网页被永久移动到新位置。服务器返回此响应时，会自动将请求者转移到新位置。</li>
+<li>302：是暂时性转移，服务器目前正从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。此代码与响应GET和HEAD请求的301代码类似，会自动将请求者转到不同的位置。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>17.POST和GET的区别</summary>
+<ul>
+<li>在规范中，GET是用来获取资源的，比如查询操作。POST是用来传输实体对象的，会使用POST来进行添加和删除操作。</li>
+<li>GET的请求参数通过URL传递，而POST的参数放在请求体中。</li>
+<li>GET请求可以直接进行回退和刷新，不会对用户和程序产生影响；而POST请求如果刷新或回退会把数据再次提交。</li>
+<li>GET产生一个TCP请求包，而POST产生两个TCP请求包。对于GET请求，浏览器会直接把请求头和请求体发送出去；对于POST而言，浏览器会先发送请求头，服务器响应100 continue，浏览器再次发送请求体。</li>
+<li>GET请求一般会被缓存，POST默认是不进行缓存的。</li>
+<li>GET请求参数会被完整保存在浏览器历史中，而POST参数不会被保留。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>18.URI和URL的区别</summary>
+<ul>
+<li>URI：全称是Uniform Resource Identifier)，中文翻译是统一资源标志符，主要作用是标记一个资源。</li>
+<li>URL：全称是Uniform Resource Location)，中文翻译是统一资源定位符，主要作用是提供一个资源的路径</li>
+</ul>
+<p>因此通俗来讲URL类似于一个人的身份证，而URL更像是一个人的地址，可以通过地址找到这个人。</p>
+</details>
+<details class="hint-container details"><summary>19.HTTP协议为什么是无状态的</summary>
+<p>当浏览器第一次发送请求给服务器，服务器响应之后，再次发送请求，服务器还是会相应，服务器是不会记住发送请求的是谁，因此是无状态协议。</p>
+</details>
+<details class="hint-container details"><summary>20.HTTP的长连接和短连接</summary>
+<p>一般情况下浏览器和服务器进行一次HTTP操作就尽力一次连接，任务结束连接就中断。</p>
+<p>长连接是服用TCP连接，多个HTTP请求可以复用同一个TCP连接。</p>
+<p>HTTP/1.1起，默认使用长连接，客户端和服务器的HTTP首部的Connection都要设置为keep-alive，才能支持长连接。</p>
+<p>HTTP的一般会有httpd守护进程，可以设置<strong>keep-alive timeout</strong>，当TCP连接闲置时间超过这个时间时，就会关闭，也可以在HTTP的header里面设置超时时间。</p>
+</details>
+<details class="hint-container details"><summary>21.HTTP1.1和HTTP2.0的区别</summary>
+<ul>
+<li><strong>新的二进制格式</strong>：HTTP1.1基于文本格式传输数据；HTTP2.0采用二进制格式传输数据，解析更高效。</li>
+<li><strong>多路复用</strong>：在一个连接里，允许同时发送多个请求或响应，并且这些请求火星应能够并行传输而不被阻塞，避免HTTP1.1出现的队头堵塞问题。</li>
+<li><strong>头部压缩</strong>：HTTP1.1的header带有大量信息，而且每次都要重新发送。HTTP2.0把header从数据中分离，封装成头帧和数据帧，使用特定算法压缩头帧，有效减少头信息大小。并且HTTP2.0在客户端和服务器端记录了之前发送的键值对，对于相同的数据不会发送，只发送差异数据。</li>
+<li><strong>服务端推送</strong>：HTTP2.0支持服务器向客户端推送资源，无需客户端发送请求到服务器端。</li>
+</ul>
+</details>
+<details class="hint-container details"><summary>22.HTTPS和HTTP的区别</summary>
+<ol>
+<li>HTTP是超文本传输协议，信息是明文传输，HTTPS则是具有安全性的SSL加密传输协议。</li>
+<li>端口不一样，HTTP是80端口，HTTPS是443 。</li>
+<li>HTTPS协议需要到CA机构申请证书，一般付费。</li>
+<li>HTTP运行唉TCP协议之上，HTTPS运行在SSL协议之上，SSL协议运行在TCP协议之上。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>23.什么是数字证书？</summary>
+<p>服务端可以向证书颁发机构CA申请证书，以避免中间人攻击（防止证书被篡改）。证书包含三部分内容：<strong>证书内容、证书签名算法和签名</strong>，签名是为了验证身份。</p>
+<p><strong>数字签名的制作过程</strong>：</p>
+<ol>
+<li>CA使用证书签名算法对证书内容进行<strong>hash运算</strong>。</li>
+<li>对hash后的值<strong>用CA的私钥加密</strong>，得到数字签名。</li>
+</ol>
+<p><strong>浏览器验证过程</strong>：</p>
+<ol>
+<li>获取证书，得到证书内容、证书签名算法和数字签名。</li>
+<li>用CA机构的公钥<strong>对数字签名解密</strong>（由于是浏览器信任的机构，所以浏览器会保存它的公钥）。</li>
+<li>用证书里的签名算法<strong>对证书内容进行hash运算</strong>。</li>
+<li>比较解密后的数字签名和对证书内容做hash运算后得到的哈希值，相等则表明证书可信。</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>24.HTTPS原理</summary>
+<p>首先是TCP三次握手，然后客户端发起一个HTTPS连接建立请求，客户端先发一个<code v-pre>Client Hello</code>的包，然后服务端响应<code v-pre>Server Hello</code>，接着再给客户端发送它的证书，然后双方经过密钥交换，最后使用交换的密钥加解密数据。</p>
+</details>
+<details class="hint-container details"><summary>25.DNS解析过程</summary>
+<ol>
+<li>浏览器搜索自己的<strong>DNS缓存</strong></li>
+<li>若没有，搜索<strong>操作系统中的DNS缓存和hosts文件</strong></li>
+<li>若没有，操作系统将域名发送至<strong>本地域名服务器</strong>，本地域名服务器查询自己的<strong>DNS缓存</strong>，成功则返回，若不成功，则依次向<strong>根域名服务器、顶级域名服务器、权限域名服务器</strong>发送查询请求，最终返回IP地址给本地域名服务器。</li>
+<li>本地域名服务器返回IP给操作系统，并自己缓存起来</li>
+<li>操作系统把IP地址返沪已给浏览器，并自己缓存起来</li>
+<li>浏览器得到域名对应的IP地址</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>26.浏览器中输入URL返回页面的过程</summary>
+<ol>
+<li>
+<p>解析域名，找到主机 IP。</p>
+</li>
+<li>
+<p>浏览器利用 IP 直接与网站主机通信，三次握手，建立 TCP 连接。浏览器会以一个随机端口向服务端的 web 程序 80 端口发起 TCP 的连接。</p>
+</li>
+<li>
+<p>建立 TCP 连接后，浏览器向主机发起一个HTTP请求。</p>
+</li>
+<li>
+<p>参数从客户端传递到服务器端。</p>
+</li>
+<li>
+<p>服务器端得到客户端参数之后，进行相应的业务处理，再将结果封装成 HTTP 包，返回给客户端。</p>
+</li>
+<li>
+<p>服务器端和客户端的交互完成，断开 TCP 连接（4 次挥手）。</p>
+</li>
+<li>
+<p>浏览器解析响应内容，进行渲染，呈现给用户。</p>
+</li>
+</ol>
+</details>
+<details class="hint-container details"><summary>27.什么是cookie和session</summary>
+<p>由于HTTP协议是无状态的协议，因此需要一些特殊手段来识别具体用户，跟踪用户的整个兑换，常用的会话跟踪技术就是cookie和session。</p>
+<p>cookie就是服务器发送给客户端的特殊信息，这些信息保存在客户端，每次发送的请求的时候就带上这些信息，服务器就能识别是谁。</p>
+<p><strong>cookie的工作流程</strong></p>
+<ol>
+<li>servlet创建cookie，保存少量数据，发送给浏览器。</li>
+<li>浏览器获得服务器发送的cookie数据，并自动保存到浏览器端。</li>
+<li>下次访问时浏览器将自动携带cookie数据发送给服务器。</li>
+</ol>
+<p>session是存放在cookie中的，当浏览器请求服务器的时候，服务器会检查这个客户端是否已经包含了session标识，成为sessionid，如果有，就按照sessionid检索出来session并使用，如果不包含sessionid，那么就创建一个sessionid存放到cookie中，并且保存在服务器端，以后的每次请求时都会带上这个sessionid。session不会根据浏览器的关闭而销毁，他有自己的超时时间。</p>
+</details>
+<details class="hint-container details"><summary>28.cookie和session的区别？</summary>
+<ul>
+<li>作用范围不同，cookie保存在客户端，session保存在服务端</li>
+<li>有效期不同，cookie可以设置为长时间保持，而session一般失效时间比较短，客户端关闭或session超时都会失效。</li>
+<li>隐私策略不同，cookie保存在客户端容易被窃取，session保存在服务端相对安全</li>
+<li>存储大小不同，单个cookie保存的数据不能超过4K；对于session来说，存储没有上限，但是考虑到服务器性能问题，尽量不要存放过多数据，并且需要设置Session删除机制。</li>
+</ul>
+</details>
+</div></template>
 
 
